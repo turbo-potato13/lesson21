@@ -20,10 +20,7 @@ public class UserRepository {
 
     public void save(User user) {
         factory.getSession().beginTransaction();
-        Query query = factory.getSession().createQuery("INSERT INTO User (name, age) SELECT :name , :age FROM User");
-        query.setParameter("name", user.getName());
-        query.setParameter("age", user.getAge());
-        query.executeUpdate();
+        factory.getSession().save(user);
         factory.getSession().getTransaction().commit();
         factory.getSession().close();
     }

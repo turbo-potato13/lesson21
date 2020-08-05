@@ -20,10 +20,7 @@ public class ProductRepository {
 
     public void save(Product product) {
         factory.getSession().beginTransaction();
-        Query query = factory.getSession().createQuery("INSERT INTO Product (title, price) SELECT :title , :price FROM Product");
-        query.setParameter("title", product.getTitle());
-        query.setParameter("price", product.getPrice());
-        query.executeUpdate();
+        factory.getSession().save(product);
         factory.getSession().getTransaction().commit();
         factory.getSession().close();
     }
